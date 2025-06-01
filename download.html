@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download - CeyloneBSD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="loading.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    h2 {
+      color: #00bcd4;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .subtitle {
+      color: #888;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 1.2rem;
+    }
+    .download-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .download-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .download-header h1 {
+      font-size: 3rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .download-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(0, 188, 212, 0.1);
+    }
+    .download-card:hover {
+      transform: translateY(-5px);
+    }
+    .download-icon {
+      font-size: 3rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    .download-title {
+      font-size: 1.5rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    .download-info {
+      color: #bbb;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    .download-button {
+      display: inline-block;
+      background: #00bcd4;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .download-button:hover {
+      background: #0097a7;
+      transform: translateY(-2px);
+    }
+    .download-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      color: #666;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .system-requirements {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 4rem;
+      border: 1px solid rgba(0, 188, 212, 0.1);
+    }
+    .system-requirements h2 {
+      color: #00bcd4;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    .requirements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .requirement-item {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1.5rem;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .requirement-item:hover {
+      transform: translateY(-5px);
+    }
+    .requirement-item h3 {
+      color: #00bcd4;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .requirement-item ul {
+      list-style: none;
+      color: #bbb;
+    }
+    .requirement-item li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .requirement-item li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #00bcd4;
+    }
+    @media (max-width: 1024px) {
+      .download-container {
+        padding: 1.5rem;
+      }
+      .download-grid {
+        gap: 1.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .download-header {
+        margin-bottom: 3rem;
+      }
+      .download-header h1 {
+        font-size: 2rem;
+      }
+      .download-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto 3rem;
+      }
+      .download-card {
+        padding: 1.5rem;
+      }
+      .download-info {
+        font-size: 1rem;
+      }
+      .system-requirements {
+        padding: 1.5rem;
+        margin-bottom: 3rem;
+      }
+      .requirements-grid {
+        gap: 1.5rem;
+      }
+      .requirement-item {
+        padding: 1.2rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .download-container {
+        padding: 1rem;
+      }
+      .download-header {
+        margin-bottom: 2rem;
+      }
+      .download-header h1 {
+        font-size: 1.8rem;
+      }
+      .download-title {
+        font-size: 1.3rem;
+      }
+      .download-info {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+      }
+      .download-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .download-button {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+      }
+      .system-requirements {
+        padding: 1.2rem;
+        margin-bottom: 2rem;
+      }
+      .system-requirements h2 {
+        font-size: 1.5rem;
+        text-align: center;
+      }
+      .requirement-item {
+        padding: 1rem;
+      }
+      .requirement-item h3 {
+        font-size: 1.1rem;
+      }
+      .requirement-item ul {
+        font-size: 0.9rem;
+      }
+    }
+    @media (hover: none) {
+      .download-card:hover,
+      .requirement-item:hover {
+        transform: none;
+      }
+      .download-button:hover {
+        transform: none;
+      }
+      .download-button:active {
+        background: #0097a7;
+        transform: scale(0.98);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="splash-container"></div>
+
+  <script src="loading.js"></script>
+  <header class="header">
+    <div class="nav-container">
+      <a href="index.html" class="logo">CeyloneBSD</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="download.html">Download</a>
+        <a href="docs.html">Docs</a>
+        <a href="community.html">Community</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="download-container">
+    <div class="download-header">
+      <h1>Download CeyloneBSD</h1>
+      <p>Choose the version that best suits your needs</p>
+    </div>
+
+    <div class="download-grid">
+      <div class="download-card">
+        <div class="download-icon">💻</div>
+        <h2 class="download-title">CeyloneBSD Standard</h2>
+        <p class="download-info">Full desktop environment with all security tools pre-installed.</p>
+        <a href="#" class="download-button">Download ISO</a>
+        <div class="download-meta">
+          <span>Version 2.1.0</span>
+          <span>Size: 2.8 GB</span>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <div class="download-icon">🔧</div>
+        <h2 class="download-title">CeyloneBSD Minimal</h2>
+        <p class="download-info">Lightweight version for advanced users. Build your own setup.</p>
+        <a href="#" class="download-button">Download ISO</a>
+        <div class="download-meta">
+          <span>Version 2.1.0</span>
+          <span>Size: 1.2 GB</span>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <div class="download-icon">☁️</div>
+        <h2 class="download-title">Cloud Image</h2>
+        <p class="download-info">Pre-configured image for cloud deployment and virtual machines.</p>
+        <a href="#" class="download-button">Download Image</a>
+        <div class="download-meta">
+          <span>Version 2.1.0</span>
+          <span>Size: 950 MB</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="system-requirements">
+      <h2>System Requirements</h2>
+      <div class="requirements-grid">
+        <div class="requirement-item">
+          <h3>Minimum Requirements</h3>
+          <ul>
+            <li>64-bit processor</li>
+            <li>4GB RAM</li>
+            <li>20GB storage</li>
+            <li>USB port for installation</li>
+          </ul>
+        </div>
+
+        <div class="requirement-item">
+          <h3>Recommended</h3>
+          <ul>
+            <li>Multi-core processor</li>
+            <li>8GB RAM or more</li>
+            <li>50GB SSD storage</li>
+            <li>Internet connection</li>
+          </ul>
+        </div>
+
+        <div class="requirement-item">
+          <h3>Supported Hardware</h3>
+          <ul>
+            <li>Most x86_64 systems</li>
+            <li>UEFI and Legacy BIOS</li>
+            <li>Common WiFi adapters</li>
+            <li>Standard GPU drivers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="nav.js"></script>
+</body>
+</html> 

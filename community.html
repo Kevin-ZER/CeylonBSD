@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community - CeyloneBSD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="loading.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+    .community-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .community-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .community-header h1 {
+      font-size: 3rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .community-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(0, 188, 212, 0.1);
+    }
+    .community-card:hover {
+      transform: translateY(-5px);
+    }
+    .community-icon {
+      font-size: 3rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    .community-title {
+      font-size: 1.5rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    .community-description {
+      color: #bbb;
+      margin-bottom: 1.5rem;
+    }
+    .community-link {
+      display: inline-block;
+      background: #00bcd4;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .community-link:hover {
+      background: #0097a7;
+    }
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+    .stat-item {
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 188, 212, 0.1);
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      color: #00bcd4;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      color: #bbb;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      .community-header h1 {
+        font-size: 2rem;
+      }
+      .community-container {
+        padding: 1rem;
+      }
+      .community-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      .community-header h1 {
+        font-size: 1.8rem;
+      }
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+      .stat-number {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="splash-container">
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+  <header class="header">
+    <div class="nav-container">
+      <a href="index.html" class="logo">CeyloneBSD</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="download.html">Download</a>
+        <a href="docs.html">Docs</a>
+        <a href="community.html">Community</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="community-container">
+    <div class="community-header">
+      <h1>Join Our Community</h1>
+      <p>Connect with CeyloneBSD users and developers worldwide</p>
+    </div>
+
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Community Members</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Countries</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5K+</div>
+        <div class="stat-label">Active Contributors</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Support</div>
+      </div>
+    </div>
+
+    <div class="community-grid">
+      <div class="community-card">
+        <div class="community-icon">💬</div>
+        <h2 class="community-title">Discord Community</h2>
+        <p class="community-description">Join our Discord server to chat with other users, get help, and stay updated.</p>
+        <a href="#" class="community-link">Join Discord</a>
+      </div>
+
+      <div class="community-card">
+        <div class="community-icon">📚</div>
+        <h2 class="community-title">Forums</h2>
+        <p class="community-description">Discuss technical topics, share your experience, and learn from others.</p>
+        <a href="#" class="community-link">Visit Forums</a>
+      </div>
+
+      <div class="community-card">
+        <div class="community-icon">🐙</div>
+        <h2 class="community-title">GitHub</h2>
+        <p class="community-description">Contribute to the project, report issues, and help improve CeyloneBSD.</p>
+        <a href="#" class="community-link">View GitHub</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="loading.js"></script>
+</body>
+</html> 

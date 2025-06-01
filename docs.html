@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation - CeyloneBSD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nav.css">
+  <link rel="stylesheet" href="loading.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    h2 {
+      color: #00bcd4;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .docs-container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+    .sidebar {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: calc(100vh - 120px);
+      position: sticky;
+      top: 100px;
+      overflow-y: auto;
+      border: 1px solid rgba(0, 188, 212, 0.1);
+      transition: all 0.3s ease;
+    }
+    .sidebar h3 {
+      color: #00bcd4;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar li {
+      margin-bottom: 0.5rem;
+    }
+    .sidebar a {
+      color: #bbb;
+      text-decoration: none;
+      display: block;
+      padding: 0.8rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .sidebar a:hover {
+      background: rgba(0, 188, 212, 0.1);
+      color: #00bcd4;
+      transform: translateX(5px);
+    }
+    .main-content {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(0, 188, 212, 0.1);
+    }
+    .main-content h3 {
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+    .main-content p {
+      margin-bottom: 1rem;
+    }
+    .main-content code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #00ffcc;
+    }
+    footer {
+      background: #0d0d0d;
+      color: #777;
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 0;
+    }
+    .splash-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loading-container {
+      width: 80px;
+      text-align: center;
+    }
+
+    .loading-text {
+      color: transparent;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, 
+        #ff0055,
+        #00ffff,
+        #00ff88,
+        #ff00ff
+      );
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: gradientMove 1s linear infinite;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: textFadeIn 0.5s ease forwards, gradientMove 1s linear infinite;
+    }
+
+    @keyframes textFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cyber-progress {
+      height: 4px;
+      background: #111;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(
+        0 0,
+        calc(100% - 4px) 0,
+        100% 50%,
+        calc(100% - 4px) 100%,
+        0 100%
+      );
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, 
+        #ff0055,
+        #00ffff,
+        #00ff88,
+        #ff00ff
+      );
+      background-size: 300% 100%;
+      animation: gradientMove 1s linear infinite;
+      position: relative;
+      transition: width 0.3s ease;
+    }
+
+    .progress-fill::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        transparent 100%
+      );
+      animation: electric 0.5s linear infinite;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 20px,
+        rgba(255, 255, 255, 0.2) 20px,
+        rgba(255, 255, 255, 0.2) 40px
+      );
+      opacity: 0.5;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    @keyframes electric {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .doc-section {
+      margin-bottom: 3rem;
+    }
+
+    .doc-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .doc-section h1 {
+      color: #00bcd4;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .doc-section h2 {
+      color: #00bcd4;
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      text-align: left;
+    }
+
+    .doc-section p {
+      margin-bottom: 1rem;
+      color: #bbb;
+      font-size: 1.1rem;
+    }
+
+    .code-block {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      font-family: monospace;
+      color: #00ffcc;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .note {
+      background: rgba(0, 188, 212, 0.1);
+      border-left: 4px solid #00bcd4;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .note ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .note li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .note li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #00bcd4;
+    }
+
+    .mobile-sidebar-toggle {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 188, 212, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-sidebar-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .mobile-sidebar-toggle:active {
+      transform: scale(0.95);
+    }
+
+    @media (max-width: 1024px) {
+      .docs-container {
+        padding: 1.5rem;
+      }
+      .doc-section h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .docs-container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        width: 280px;
+        height: calc(100vh - 80px);
+        z-index: 999;
+        transition: left 0.3s ease;
+        background: rgba(15, 17, 21, 0.98);
+        backdrop-filter: blur(10px);
+      }
+      .sidebar.active {
+        left: 0;
+        box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+      }
+      .mobile-sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .main-content {
+        margin-top: 1rem;
+      }
+      .doc-section h1 {
+        font-size: 2rem;
+      }
+      .doc-section h2 {
+        font-size: 1.6rem;
+      }
+      .doc-section p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .docs-container {
+        padding: 1rem;
+      }
+      .main-content {
+        padding: 1.5rem;
+      }
+      .doc-section h1 {
+        font-size: 1.8rem;
+      }
+      .doc-section h2 {
+        font-size: 1.4rem;
+      }
+      .doc-section p {
+        font-size: 0.95rem;
+      }
+      .code-block {
+        padding: 1rem;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+      }
+      .note {
+        padding: 1rem;
+        margin: 1rem 0;
+        font-size: 0.95rem;
+      }
+      .sidebar {
+        width: 100%;
+        padding: 1rem;
+      }
+      .sidebar a {
+        padding: 1rem;
+      }
+      .mobile-sidebar-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+
+    @media (max-height: 600px) {
+      .sidebar {
+        height: calc(100vh - 60px);
+        top: 60px;
+      }
+    }
+
+    @media (hover: none) {
+      .sidebar a:hover {
+        transform: none;
+      }
+      .mobile-sidebar-toggle:hover {
+        transform: none;
+      }
+      .mobile-sidebar-toggle:active {
+        transform: scale(0.95);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="splash-container"></div>
+
+  <script src="loading.js"></script>
+  <header class="header">
+    <div class="nav-container">
+      <a href="index.html" class="logo">CeyloneBSD</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="download.html">Download</a>
+        <a href="docs.html">Docs</a>
+        <a href="community.html">Community</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <aside class="sidebar">
+      <h3>Documentation</h3>
+      <ul>
+        <li><a href="#getting-started">Getting Started</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#configuration">Configuration</a></li>
+        <li><a href="#security">Security Features</a></li>
+        <li><a href="#tools">Tools & Utilities</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <section id="getting-started" class="doc-section">
+        <h1>Getting Started with CeyloneBSD</h1>
+        <p>Welcome to the CeyloneBSD documentation. This guide will help you get started with our secure, modern, and powerful operating system.</p>
+        
+        <div class="note">
+          Before you begin, make sure you have:
+          <ul>
+            <li>A 64-bit capable computer</li>
+            <li>At least 4GB of RAM</li>
+            <li>20GB of free disk space</li>
+            <li>USB drive (8GB minimum) for installation</li>
+          </ul>
+        </div>
+
+        <h2>Quick Start</h2>
+        <p>To get started with CeyloneBSD, follow these steps:</p>
+        <div class="code-block">
+          <pre>
+# Download the ISO
+wget https://ceylonebsd.org/downloads/latest.iso
+
+# Verify the checksum
+sha256sum latest.iso
+
+# Create bootable USB (replace sdX with your USB device)
+dd if=latest.iso of=/dev/sdX bs=4M status=progress</pre>
+        </div>
+      </section>
+
+      <!-- More sections would go here -->
+    </main>
+  </div>
+
+  <button class="mobile-sidebar-toggle" aria-label="Toggle documentation menu">☰</button>
+
+  <script src="nav.js"></script>
+  <script>
+    // Mobile sidebar toggle
+    const sidebarToggle = document.querySelector('.mobile-sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      if (sidebar.classList.contains('active')) {
+        body.style.overflow = 'hidden';
+      } else {
+        body.style.overflow = '';
+      }
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+        sidebar.classList.remove('active');
+        body.style.overflow = '';
+      }
+    });
+
+    // Close sidebar when clicking links
+    sidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 900) {
+          sidebar.classList.remove('active');
+          body.style.overflow = '';
+        }
+      });
+    });
+
+    // Close sidebar on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        body.style.overflow = '';
+      }
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2025 CeyloneBSD. Built for hackers and defenders worldwide.</p>
+  </footer>
+</body>
+</html> 
